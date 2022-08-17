@@ -21,9 +21,15 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 240px;
+    width: 78px;
     background: #11101d;
     padding: 6px 14px;
+    z-index: 99;
+    transition: all .5s ease;
+}
+
+.sidebar.active {
+    width: 240px;
 }
 
 .sidebar .logo_content .logo {
@@ -32,6 +38,13 @@ body {
     color: #fff;
     height: 50px;
     width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s ease;
+}
+
+.sidebar.active .logo_content .logo {
+    opacity: 1;
 }
 
 .sidebar .logo i {
@@ -48,13 +61,17 @@ body {
     font-size: 20px;
     color: #fff;
     position: absolute;
-    left: 90%;
+    left: 50%;
     top: 6px;
     height: 50px;
     width: 50px;
     text-align: center;
     line-height: 50px;
     transform: translateX(-50%);
+}
+
+.sidebar.active #btn {
+    left: 90%;
 }
 
 .sidebar ul {
@@ -72,6 +89,7 @@ body {
 
 .sidebar ul li .tooltip {
     position: absolute;
+    display: block;
     left: 122px;
     top: 0;
     height: 35px;
@@ -83,8 +101,12 @@ body {
     border-radius: 6px;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     transition: 0s;
+}
+
+.sidebar.active ul li .tooltip {
+    display: none;
 }
 
 .sidebar ul li:hover .tooltip {
@@ -113,12 +135,19 @@ body {
     color: #fff;
     position: absolute;
     z-index: 99;
+    transition: all .5s ease;
+}
+
+.sidebar ul li .bx-search:hover {
+    color: #1d1b31;
+    background: #fff;
 }
 
 .sidebar ul li a {
     display: flex;
     align-items: center;
     color: #fff;
+    white-space: nowrap;
     border-radius: 12px;
     text-decoration: none;
     transition: all .4s ease;
@@ -137,6 +166,16 @@ body {
     text-align: center;
 }
 
+.sidebar .links_name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.active .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .sidebar .profile_content {
     position: absolute;
     color: #fff;
@@ -149,12 +188,25 @@ body {
     position: relative;
     padding: 10px 6px;
     height: 60px;
+    background: none;
+    transition: all .4s ease;
+}
+
+.sidebar.active .profile_content .profile {
     background: #1d1b31;
 }
 
 .sidebar .profile_content .profile .profile_details {
     display: flex;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.sidebar.active .profile .profile_details {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .sidebar .profile_details img {
@@ -180,19 +232,34 @@ body {
 .profile #log_out {
     font-size: 20px;
     position: absolute;
-    left: 88%;
+    left: 50%;
     bottom: 5px;
     line-height: 50px;
     min-width: 50px;
+    text-align: center;
+    background: #1d1b31;
     border-radius: 12px;
     transform: translateX(-50%);
+    transition: all .4s ease;
+}
+
+.sidebar.active .profile #log_out {
+    left: 88%;
+}
+
+.sidebar.active .profile #log_out {
+    background: none;
 }
 
 .home_content {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
-    width: calc(100% - 240px);
-    left: 240px;
+    width: calc(100% - 87px);
+    left: 78px;
+    transition: all .5s ease;
 }
 
 .home_content .text {
@@ -201,3 +268,39 @@ body {
     color: #1d1b31;
     margin: 12px;
 }
+
+.credit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 2.5rem;
+}
+
+.credit > a {
+    color: #000;
+}
+
+.copy > p {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.sidebar.active ~ .home_content {
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.home-section .text{
+    display: inline-block;
+    color: #11101d;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 18px
+  }
+
+@media (max-width: 420px) {
+    .sidebar li .tooltip{
+      display: none;
+    }
+  }
